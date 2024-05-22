@@ -1,0 +1,36 @@
+package main
+
+import "fmt"
+
+//funcao
+
+type Palavra struct {
+	valor   string
+	proximo *Palavra
+}
+
+type Pilha struct {
+	topo *Palavra
+}
+
+func (p *Pilha) Empilhar(valor string) {
+	novoNo := Palavra{valor: valor, proximo: p.topo}
+	p.topo = &novoNo
+}
+func main() {
+	var palavra string
+	fmt.Println("Digite uma palavra: ")
+	fmt.Scan(&palavra)
+
+	pilha := &Pilha{}
+
+	for _, letra := range palavra {
+		pilha.Empilhar(string(letra))
+	}
+
+	for pilha.topo != nil {
+		fmt.Print(pilha.topo.valor, " ")
+		pilha.topo = pilha.topo.proximo
+
+	}
+}
